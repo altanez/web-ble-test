@@ -53,7 +53,7 @@
     const timestampContainer = document.getElementById('timestamp');
 
     //Define BLE Device Specs
-    var deviceName ='ESP32';
+    var deviceName ='Remote Key';
     var bleService = '775544b0-e88d-406f-972e-41bfab736021';
     var ledCharacteristic = '775544b1-e88d-406f-972e-41bfab736021';
     var sensorCharacteristic= '775544b2-e88d-406f-972e-41bfab736021';
@@ -92,7 +92,8 @@
     function connectToDevice(){
         console.log('Initializing Bluetooth...');
         navigator.bluetooth.requestDevice({
-            filters: optionalServices: [bleService] //[{name: deviceName}],
+            filters: [{name: deviceName}], 
+            optionalServices: [bleService] 
         })
         .then(device => {
             console.log('Device Selected:', device.name);
