@@ -1,3 +1,11 @@
+<!--
+  Rui Santos
+  Complete project details at https://RandomNerdTutorials.com/esp32-web-bluetooth/
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files.
+  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +29,7 @@
                 <p class="gray-label">BLE state: <strong><span id="bleState" style="color:#d13a30;">Disconnected</span></strong></p>
             </div>
         </div>
-        <div class="card-grid">   
+        <div class="card-grid">
             <div class="card">
                 <h2>Fetched Value</h2>
                 <p class="reading"><span id="valueContainer">NaN</span></p>
@@ -53,10 +61,10 @@
     const timestampContainer = document.getElementById('timestamp');
 
     //Define BLE Device Specs
-    var deviceName ='Remote Key';
-    var bleService = '775544b0-e88d-406f-972e-41bfab736021';
-    var ledCharacteristic = '775544b1-e88d-406f-972e-41bfab736021';
-    var sensorCharacteristic= '775544b2-e88d-406f-972e-41bfab736021';
+    var deviceName ='ESP32';
+    var bleService = '19b10000-e8f2-537e-4f6c-d104768a1214';
+    var ledCharacteristic = '19b10002-e8f2-537e-4f6c-d104768a1214';
+    var sensorCharacteristic= '19b10001-e8f2-537e-4f6c-d104768a1214';
 
     //Global Variables to Handle Bluetooth
     var bleServer;
@@ -92,8 +100,8 @@
     function connectToDevice(){
         console.log('Initializing Bluetooth...');
         navigator.bluetooth.requestDevice({
-            filters: [{name: deviceName}], 
-            optionalServices: [bleService] 
+            filters: [{name: deviceName}],
+            optionalServices: [bleService]
         })
         .then(device => {
             console.log('Device Selected:', device.name);
@@ -124,7 +132,7 @@
             console.log("Read value: ", value);
             const decodedValue = new TextDecoder().decode(value);
             console.log("Decoded value: ", decodedValue);
-            retrievedValue.innerHTML = decodedValue;            
+            retrievedValue.innerHTML = decodedValue;
         })
         .catch(error => {
             console.log('Error: ', error);
@@ -203,7 +211,7 @@
         var hours = ("00" + currentdate.getHours()).slice(-2);
         var minutes = ("00" + currentdate.getMinutes()).slice(-2);
         var seconds = ("00" + currentdate.getSeconds()).slice(-2);
-        
+
         var datetime = day + "/" + month + "/" + year + " at " + hours + ":" + minutes + ":" + seconds;
         return datetime;
     }
